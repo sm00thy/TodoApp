@@ -25,7 +25,9 @@ export class TodoService {
  }
 
   public postItem(item: any): Observable<any> {
-    return this.http.post(this.apiUrl + 'create', item);
+    const reqHeader = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(this.apiUrl + 'create', item,
+      {headers: reqHeader});
   }
 
   public update(item: any): Observable<any> {

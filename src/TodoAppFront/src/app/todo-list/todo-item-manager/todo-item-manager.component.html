@@ -1,0 +1,12 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="create(f)">
+    <mat-form-field>
+      <input matInput
+         placeholder="Type new todo here"
+         ngModel
+         required name="newTodo">
+    </mat-form-field>
+    <button mat-stroked-button color="primary"
+          type="submit" [disabled]="!f.valid">Add</button>
+  </form>
+</div>

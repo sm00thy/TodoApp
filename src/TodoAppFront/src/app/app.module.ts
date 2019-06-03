@@ -10,7 +10,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoService } from './shared/todo.service';
-import { TodoItemManagerComponent } from './todo-item-manager/todo-item-manager.component';
+import { TodoItemManagerComponent } from './todo-list/todo-item-manager/todo-item-manager.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TextFieldModule } from '@angular/cdk/text-field';

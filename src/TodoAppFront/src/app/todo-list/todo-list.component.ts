@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TodoItem} from '../model/todoItem';
 import {TodoService} from '../shared/todo.service';
+import {Subject} from 'rxjs';
+import {forEach} from '@angular/router/src/utils/collection';
+import {element} from 'protractor';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,18 +11,42 @@ import {TodoService} from '../shared/todo.service';
   styleUrls: ['./todo-list.component.scss']
 })
 
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnChanges {
 
   isItemChecked = false;
-  items: Array<TodoItem>;
+  items = [];
+  item;
+  counter: number;
 
-  constructor(private itemsSvc: TodoService) {
+  constructor(private itemsSvc: TodoService,
+              private todoService: TodoService) {
   }
 
   ngOnInit() {
     this.itemsSvc.getItems().subscribe(
-      (data) => this.items = data
-    );
+      (data) => {for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const element = {
+          id: data[key].id,
+          text: data[key].text
+        };
+        this.items.push(element);
+      }
+      }
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+  }
+
+  itemRefresh(e) {
+    this.items.push(e);
+  }
+
+  deleteItem(element) {
+    this.items = this.items.filter(x => x !== element),
+    this.todoService.deleteItem(element.id).subscribe(),
+      error => console.log(error);
   }
 
 }
