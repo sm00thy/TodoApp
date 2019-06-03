@@ -15,8 +15,6 @@ export class TodoListComponent implements OnInit, OnChanges {
 
   isItemChecked = false;
   items = [];
-  item;
-  counter: number;
 
   constructor(private itemsSvc: TodoService,
               private todoService: TodoService) {
