@@ -1,0 +1,15 @@
+<div class="title"><h2>Your Todo Items</h2></div>
+
+<div class="container">
+<mat-list>
+  <mat-list-item class="mat-2-line" *ngFor="let item of items">
+    <mat-checkbox color="primary"
+                  #showDetails [checked]="isItemChecked">
+    </mat-checkbox>
+    <div class="mat-list-item-text">
+      <p [ngClass]="showDetails.checked == true ? 'strikethrough' : ''">{{item.text}}</p>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+</div>
